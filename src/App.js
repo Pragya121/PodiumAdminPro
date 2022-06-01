@@ -1,9 +1,74 @@
-import './App.css'
-
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import MainDash from "./components/MainDash/MainDash";
+import AddUser from "./components/AddUser/AddUser";
+// import { NotFound } from "./components/NotFound";
+import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
+  const [quote, setQuote] = useState();
+  let k = 0;
+  const getQuote = () => {
+    let quoteObj;
+
+    var url = new URL(
+      "https://api.quotable.io/random?minLength=100&maxLength=140"
+    );
+
+    fetch(url, {
+      method: "GET",
+      mode: "cors", // no-cors, *cors, same-origin
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        quoteObj = data;
+        setQuote(data);
+        console.log(quoteObj);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    //  return quoteObj;
+  };
+  useEffect(() => {
+    getQuote();
+  }, []);
+
   return (
     <div className="App">
-        Subscribe Zainkeepscode
+      <div className="AppGlass">
+        <Sidebar></Sidebar>
+        <div>
+          <Router>
+            <div>
+              <Routes>
+                <Route exact path="/" element={<MainDash />} />
+                <Route exact path="/addUser" element={<AddUser />} />
+
+                {/* <Route path="*" element={<NotFound />} /> */}
+              </Routes>
+            </div>
+          </Router>
+        </div>
+        <div className="RightSide">
+          {quote !== undefined ? (
+            <div>
+              <div className="quote">{quote.content}</div>
+              <span>{quote.author}</span>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
