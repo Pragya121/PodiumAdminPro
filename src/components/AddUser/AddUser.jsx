@@ -1,6 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react'
 import Loading from '../../imgs/Loading.gif'
-import { UserFields } from "../../Data/Data.js";
+import { WriterUserFields } from "../../Data/Data.js";
+import { EditorUserFields } from "../../Data/Data.js";
+import { PMUserFields } from "../../Data/Data.js";
+import { SalesUserFields } from "../../Data/Data.js";
+import { AdminUserFields } from "../../Data/Data.js";
+import { ClientUserFields } from "../../Data/Data.js";
+import { minWidth } from '@mui/system';
  const AddUser = () => {
 
     const [formData, setFormData] = useState({
@@ -10,18 +16,18 @@ import { UserFields } from "../../Data/Data.js";
   });
  
    const form = useRef(null);
-useEffect(() => {
-  let tempFormObj = {
-    data:{},
-    fields: UserFields,
-    allSet:true,
-  }
- setFormData(tempFormObj)
- formData.fields= UserFields;
-console.log(UserFields);
-console.log(formData);
+// useEffect(() => {
+//   let tempFormObj = {
+//     data:{},
+//     fields: WriterUserFields,
+//     allSet:true,
+//   }
+//  setFormData(tempFormObj)
+//  formData.fields= WriterUserFields;
+
+// console.log(formData);
  
-}, [])
+// }, [])
 const submit = (e)=>{
    e.preventDefault();
     document.getElementById("submit").setAttribute("disabled", "true");
@@ -35,35 +41,158 @@ const submit = (e)=>{
     console.log(formData.data);
 }
   return (
-    <div className='UserGlass'>
+    <div >
       <h1>Add a new user</h1>
 <div className="form-group">
                 <form ref={form} id="resumeForm" onSubmit={submit}>
+                  <label for="roleType"> Please select the user type</label>
+                     <select onChange={(e)=>{
+                       let input = e.target.value;
+                       if(input === "writer"){  
+                          
+                          let tempFormObj = {
+    data:{},
+    fields: WriterUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+ formData.fields= WriterUserFields;
+
+console.log(formData);
+
+                       }else  if(input === "editor"){
+                        
+                          let tempFormObj = {
+    data:{},
+    fields: EditorUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+ formData.fields= EditorUserFields;
+
+console.log(formData);
+                         
+                       }
+                     else  if(input === "project manager"){
+                          let tempFormObj = {
+    data:{},
+    fields: PMUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+ formData.fields= PMUserFields;
+
+console.log(formData);
+                       }
+                       else  if(input === "salesperson"){
+                          let tempFormObj = {
+    data:{},
+    fields: SalesUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+ formData.fields= SalesUserFields;
+
+console.log(formData);
+                       }
+                        else if(input === "administrator"){
+                            
+                          let tempFormObj = {
+    data:{},
+    fields: AdminUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+ formData.fields= AdminUserFields;
+
+console.log(formData);
+                       }  else if(input === "client"){
+                            
+                          let tempFormObj = {
+    data:{},
+    fields: ClientUserFields,
+    allSet:true,
+  }
+ setFormData(tempFormObj)
+  formData.fields= ClientUserFields;
+
+console.log(formData);
+                       }
+                     }}>
+                       <option> writer</option>
+                       <option> salesperson</option>
+                       <option> administrator</option>
+                       <option> editor</option>
+                       <option> client</option>
+                       <option> project manager</option>
+                     </select>
                   {formData.allSet
                     ? formData.fields.map((field) => {
+                      if(field.key ===0)
                         return (
+                          <span>
+                         
                           <input
-                            type="text"
-                            id={field}
-                            name={field}
-                            key={field}
-                            className="form-control"
-                            style={{ marginBottom: "5px" }}
-                            placeholder={"Enter " + field}
+                            type={field.type}
+                            id={field.fname}
+                          
+                            name={field.fname}
+                            key={field.fname}
+                            className="formForm"
+                            style={{ marginBottom: "5px", minWidth: "100%" }}
+                            placeholder={"Enter " + field.label}
                             onChange={(e) => {
                               setFormData({
                                 ...formData,
                                 data: {
                                   ...formData.data,
-                                  [field]: e.target.value,
+                                  [field.fname]: e.target.value,
                                 },
                               });
                             }}
                             required
-                          />
+                          /><br/>
+                          </span>
                         );
+                        else  if(field.key ===2)
+                        return(
+                        <>   <label   style={{ marginBottom: "5px", width: "20%" }} for={field.fname}>{field.label}</label>
+                        <input 
+                           id={field.fname}
+                            name={field.fname}
+                            key={field.fname}
+                            className="formForm"
+                            style={{ marginBottom: "5px", width: "80%" }}
+                            placeholder={"Enter " + field.label}
+                            onChange={(e) => {
+                              setFormData({
+                                ...formData,
+                                data: {
+                                  ...formData.data,
+                                  [field.fname]: e.target.value,
+                                },
+                              });
+                            }}
+                            list={field.fname}
+                            required />
+                            <datalist id={field.fname}>
+                              
+                          
+                            <option> Rjhgdjhf</option>
+                            {field.options.map((opt) => {
+                             return(
+                               <option value={opt.value}> {opt.label}</option>
+                             )
+
+                            })}
+                            </datalist>
+                         
+                      
+                        <br/></>)
                       })
+                      
                     : ""}
+                 
                   <input
                     type="submit"
                     className="form-control"

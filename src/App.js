@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import MainDash from "./components/MainDash/MainDash";
 import AddUser from "./components/AddUser/AddUser";
+import NotFound from "./components/NotFound";
 // import { NotFound } from "./components/NotFound";
 import Sidebar from "./components/Sidebar/Sidebar";
 function App() {
   const [quote, setQuote] = useState();
-  let k = 0;
+
   const getQuote = () => {
     let quoteObj;
 
@@ -47,16 +48,13 @@ function App() {
       <div className="AppGlass">
         <Sidebar></Sidebar>
         <div>
-          <Router>
-            <div>
-              <Routes>
-                <Route exact path="/" element={<MainDash />} />
-                <Route exact path="/addUser" element={<AddUser />} />
-
-                {/* <Route path="*" element={<NotFound />} /> */}
-              </Routes>
-            </div>
-          </Router>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" render={() => <MainDash />} />
+              <Route path="/addUser" render={() => <AddUser />} />
+              <Route path="*" render={() => <NotFound />} />
+            </Switch>
+          </BrowserRouter>
         </div>
         <div className="RightSide">
           {quote !== undefined ? (

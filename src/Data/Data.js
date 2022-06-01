@@ -46,12 +46,280 @@ export const SidebarData = [
     path: "/",
   },
 ];
-export const UserFields = [
+export const WriterUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 1, type: "date", fname: "dob", label: "date of birth" },
+  { key: 0, type: "text", fname: "address", label: "address" },
+  { key: 0, type: "number", fname: "bankAccNo", label: "bank account number" },
+  { key: 0, type: "text", fname: "ifscCode", label: "IFSC code" },
   {
+    key: 2,
     type: "text",
-    fname: "Name",
+    fname: "writerSkills",
+    label: "Writer skills",
+    options: [
+      { value: "blogs", label: "Blogs" },
+      { value: "website-content", label: "Website Content" },
+      { value: "college-assignment", label: "College Assignment" },
+      { value: "general", label: "General" },
+    ],
   },
-  "Age",
+  {
+    key: 2,
+    type: "text",
+    fname: "writerDomain",
+    label: "Writer domain",
+    options: [
+      { value: "finance", label: "Finance" },
+      { value: "hr", label: "HR" },
+      { value: "tech", label: "Tech" },
+      { value: "marketing", label: "Marketing" },
+      { value: "general", label: "General" },
+    ],
+  },
+  {
+    key: 2,
+    type: "text",
+    fname: "podiumProRelationship",
+    label: "Relationship with Podium pro",
+    options: [
+      { value: "part-time", label: "Part time" },
+      { value: "full-time", label: "Full time" },
+    ],
+  },
+  {
+    key: 2,
+    type: "text",
+    fname: "commercialAgreement",
+    label: "Commercial Agreement",
+
+    options: [
+      { value: "salary", label: "Salary" },
+      { value: "per-word", label: "per Word" },
+    ],
+  },
+  { key: 0, type: "number", fname: "salaryValue", label: "Salary Value" },
+  {
+    key: 0,
+    type: "number",
+    fname: "perWordValue",
+    label: "per Word value(if applicable)",
+  },
+  // {
+  //   key: 2,
+  //   type: "text",
+  //   fname: "userType",
+  //   label: "Type of user",
+  //   options: [
+  //     { value: "writer", label: "Writer" },
+  //     { value: "editor", label: "Editor" },
+  //     { value: "project manager", label: "Project Manager" },
+  //     { value: "admin", label: "Administrator" },
+  //   ],
+  // },
+  {
+    key: 2,
+    type: "text",
+    fname: "isActive",
+    label: "Status",
+    options: [
+      { value: true, label: "Yes" },
+      { value: false, label: "No" },
+    ],
+  },
+  { key: 0, type: "number", fname: "rating", label: "Rating" },
+];
+export const EditorUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 1, type: "date", fname: "dob", label: "date of birth" },
+  { key: 0, type: "text", fname: "address", label: "address" },
+  { key: 0, type: "number", fname: "bankAccNo", label: "bank account number" },
+  { key: 0, type: "text", fname: "ifscCode", label: "IFSC code" },
+  {
+    key: 2,
+    type: "text",
+    fname: "writerSkills",
+    label: "Writer skills",
+    options: [
+      { value: "blogs", label: "Blogs" },
+      { value: "website-content", label: "Website Content" },
+      { value: "college-assignment", label: "College Assignment" },
+      { value: "general", label: "General" },
+    ],
+  },
+  {
+    key: 2,
+    type: "text",
+    fname: "writerDomain",
+    label: "Writer domain",
+    options: [
+      { value: "finance", label: "Finance" },
+      { value: "hr", label: "HR" },
+      { value: "tech", label: "Tech" },
+      { value: "marketing", label: "Marketing" },
+      { value: "general", label: "General" },
+    ],
+  },
+  {
+    key: 2,
+    type: "text",
+    fname: "podiumProRelationship",
+    label: "Relationship with Podium pro",
+    options: [
+      { value: "part-time", label: "Part time" },
+      { value: "full-time", label: "Full time" },
+    ],
+  },
+  {
+    key: 2,
+    type: "text",
+    fname: "commercialAgreement",
+    label: "Commercial Agreement",
+    options: [
+      { value: "salary", label: "Salary" },
+      { value: "per-word", label: "per Word" },
+    ],
+    action: `()={if(e.target.value === "salary"){document.getElementbyId("salaryValue").disabled = false;
+          document.getElementbyId("perWordValue").disabled = true;}
+          
+          else if(e.target.value === "per-word")
+         {document.getElementbyId("salaryValue").disabled = true;
+          document.getElementbyId("perWordValue").disabled = false;}
+  
+  
+  }`,
+  },
+  {
+    key: 0,
+    type: "number",
+    fname: "salaryValue",
+    label: "Salary Value",
+    disabled: true,
+  },
+  {
+    key: 0,
+    type: "number",
+    fname: "perWordValue",
+    label: "per Word value(if applicable)",
+    disabled: true,
+  },
+  // {
+  //   key: 2,
+  //   type: "text",
+  //   fname: "userType",
+  //   label: "Type of user",
+  //   options: [
+  //     { value: "writer", label: "Writer" },
+  //     { value: "editor", label: "Editor" },
+  //     { value: "project manager", label: "Project Manager" },
+  //     { value: "admin", label: "Administrator" },
+  //   ],
+  // },
+  {
+    key: 2,
+    type: "text",
+    fname: "isActive",
+    label: "Status",
+    options: [
+      { value: true, label: "Yes" },
+      { value: false, label: "No" },
+    ],
+  },
+  { key: 0, type: "number", fname: "rating", label: "Rating" },
+];
+export const SalesUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+
+  // {
+  //   key: 2,
+  //   type: "text",
+  //   fname: "userType",
+  //   label: "Type of user",
+  //   options: [
+  //     { value: "writer", label: "Writer" },
+  //     { value: "editor", label: "Editor" },
+  //     { value: "project manager", label: "Project Manager" },
+  //     { value: "admin", label: "Administrator" },
+  //   ],
+  // },
+  {
+    key: 2,
+    type: "text",
+    fname: "isActive",
+    label: "Status",
+    options: [
+      { value: true, label: "Yes" },
+      { value: false, label: "No" },
+    ],
+  },
+];
+export const PMUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+
+  // {
+  //   key: 2,
+  //   type: "text",
+  //   fname: "userType",
+  //   label: "Type of user",
+  //   options: [
+  //     { value: "writer", label: "Writer" },
+  //     { value: "editor", label: "Editor" },
+  //     { value: "project manager", label: "Project Manager" },
+  //     { value: "admin", label: "Administrator" },
+  //   ],
+  // },
+  {
+    key: 2,
+    type: "text",
+    fname: "isActive",
+    label: "Status",
+    options: [
+      { value: true, label: "Yes" },
+      { value: false, label: "No" },
+    ],
+  },
+];
+export const AdminUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+
+  // {
+  //   key: 2,
+  //   type: "text",
+  //   fname: "userType",
+  //   label: "Type of user",
+  //   options: [
+  //     { value: "writer", label: "Writer" },
+  //     { value: "editor", label: "Editor" },
+  //     { value: "project manager", label: "Project Manager" },
+  //     { value: "admin", label: "Administrator" },
+  //   ],
+  // },
+  {
+    key: 2,
+    type: "text",
+    fname: "isActive",
+    label: "Status",
+    options: [
+      { value: true, label: "Yes" },
+      { value: false, label: "No" },
+    ],
+  },
+];
+export const ClientUserFields = [
+  { key: 0, type: "text", fname: "name", label: "name" },
+  { key: 0, type: "text", fname: "email", label: "email" },
+  { key: 0, type: "text", fname: "company", label: "company" },
+  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
 ];
 // Analytics Cards Data
 export const cardsData = [

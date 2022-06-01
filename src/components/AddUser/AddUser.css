@@ -1,0 +1,33 @@
+span{
+    align-items: center;
+    width: auto;
+    flex-direction: column;
+}
+label{
+    display: inline-flexbox;
+        padding: 1rem 0 .25rem;
+        margin-right: 0.6pc;
+        /* text-transform: uppercase; */
+        font-size: 14px;
+      
+}
+.formForm {
+    display: block;
+    width: auto;
+    border: 2px solid #2980B9;
+    padding: .5rem;
+    font-size: 18px;
+    border-radius: 5px;
+}
+@media screen and (max-width: 1200px) {
+    .AddUser {
+        justify-content: flex-start;
+        margin-top: 2rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .AddUser {
+        align-items: center;
+    }
+}
