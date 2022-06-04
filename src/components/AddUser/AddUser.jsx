@@ -1,4 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react'
+import 'regenerator-runtime/runtime';
+import axios from 'axios';
 import Loading from '../../imgs/Loading.gif'
 import { WriterUserFields } from "../../Data/Data.js";
 import { EditorUserFields } from "../../Data/Data.js";
@@ -6,7 +8,11 @@ import { PMUserFields } from "../../Data/Data.js";
 import { SalesUserFields } from "../../Data/Data.js";
 import { AdminUserFields } from "../../Data/Data.js";
 import { ClientUserFields } from "../../Data/Data.js";
-import { minWidth } from '@mui/system';
+import ComboBox from "react-responsive-combo-box";
+import "react-responsive-combo-box/dist/index.css";
+
+
+import "./AddUser.css"
  const AddUser = () => {
 
     const [formData, setFormData] = useState({
@@ -14,20 +20,32 @@ import { minWidth } from '@mui/system';
     fields: [],
     allSet: false,
   });
- 
-   const form = useRef(null);
-// useEffect(() => {
-//   let tempFormObj = {
-//     data:{},
-//     fields: WriterUserFields,
-//     allSet:true,
-//   }
-//  setFormData(tempFormObj)
-//  formData.fields= WriterUserFields;
+  // ...
 
-// console.log(formData);
+const BASE_URL = 'https://us-central1-podiumpro-9cc8e.cloudfunctions.net';
+
+const getTodoItems = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/configVariables`);
+
+    const resp = response.data;
+
+    console.log(`info`,resp);
+
+    return resp;
+  } catch (errors) {
+    console.error(errors);
+  }
+};
+useEffect(() => {
+  getTodoItems()
+
  
-// }, [])
+}, [])
+
+   const form = useRef(null);
+
+
 const submit = (e)=>{
    e.preventDefault();
     document.getElementById("submit").setAttribute("disabled", "true");
@@ -43,7 +61,7 @@ const submit = (e)=>{
   return (
     <div >
       <h1>Add a new user</h1>
-<div className="form-group">
+<div className="form-group" id="newForm">
                 <form ref={form} id="resumeForm" onSubmit={submit}>
                   <label for="roleType"> Please select the user type</label>
                      <select onChange={(e)=>{
@@ -82,7 +100,7 @@ console.log(formData);
  setFormData(tempFormObj)
  formData.fields= PMUserFields;
 
-console.log(formData);
+
                        }
                        else  if(input === "salesperson"){
                           let tempFormObj = {
@@ -93,7 +111,7 @@ console.log(formData);
  setFormData(tempFormObj)
  formData.fields= SalesUserFields;
 
-console.log(formData);
+
                        }
                         else if(input === "administrator"){
                             
@@ -105,7 +123,7 @@ console.log(formData);
  setFormData(tempFormObj)
  formData.fields= AdminUserFields;
 
-console.log(formData);
+
                        }  else if(input === "client"){
                             
                           let tempFormObj = {
@@ -116,7 +134,7 @@ console.log(formData);
  setFormData(tempFormObj)
   formData.fields= ClientUserFields;
 
-console.log(formData);
+
                        }
                      }}>
                        <option> writer</option>
@@ -139,7 +157,7 @@ console.log(formData);
                             name={field.fname}
                             key={field.fname}
                             className="formForm"
-                            style={{ marginBottom: "5px", minWidth: "100%" }}
+                            
                             placeholder={"Enter " + field.label}
                             onChange={(e) => {
                               setFormData({
@@ -149,44 +167,60 @@ console.log(formData);
                                   [field.fname]: e.target.value,
                                 },
                               });
+                           
+                              
                             }}
                             required
                           /><br/>
                           </span>
                         );
-                        else  if(field.key ===2)
+                        else  if(field.key ===2 && field.options.length !==0)
                         return(
-                        <>   <label   style={{ marginBottom: "5px", width: "20%" }} for={field.fname}>{field.label}</label>
-                        <input 
-                           id={field.fname}
-                            name={field.fname}
-                            key={field.fname}
-                            className="formForm"
-                            style={{ marginBottom: "5px", width: "80%" }}
-                            placeholder={"Enter " + field.label}
-                            onChange={(e) => {
-                              setFormData({
-                                ...formData,
-                                data: {
-                                  ...formData.data,
-                                  [field.fname]: e.target.value,
-                                },
-                              });
-                            }}
-                            list={field.fname}
-                            required />
-                            <datalist id={field.fname}>
-                              
-                          
-                            <option> Rjhgdjhf</option>
-                            {field.options.map((opt) => {
-                             return(
-                               <option value={opt.value}> {opt.label}</option>
-                             )
+                        <>  
 
-                            })}
-                            </datalist>
-                         
+<ComboBox
+id={field.fname}
+        options={field.options}
+        placeholder={"Enter " + field.label}
+        defaultIndex={4}
+        optionsListMaxHeight={300}
+        style={{
+          width: "90%",
+          height:"14px"
+         
+      }}
+        focusColor="#20C374"
+        renderOptions={(option) => (
+          <div className="comboBoxOption">{option}</div>
+        )}
+        onSelect={(option) => {setFormData({
+          ...formData,
+          data: {
+            ...formData.data,
+            [field.fname]:option,
+          },
+        });
+     if(field.fname ==="commercialAgreement"){
+      let sal= document.getElementById("salaryValue");
+      let perW =document.getElementById("perWordValue");
+   if(option==="per-word"){
+sal.value="";
+sal.disabled= true;
+perW.disabled = false;
+   }
+   else if(option==="salary"){
+perW.value="";
+perW.disabled = true;
+sal.disabled=false;
+   }
+     }
+    
+    
+    }}
+        // onChange={(event) => console.log(event.target.value)}
+        enableAutocomplete
+        // onOptionsChange={(option) => setHighlightedOption(option)}
+      />
                       
                         <br/></>)
                       })
