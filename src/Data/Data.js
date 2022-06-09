@@ -67,7 +67,7 @@ export const WriterUserFields = [
   {
     key: 5,
     type: "text",
-    fname: "writerDomains",
+    fname: "domains",
     label: "Writer domain",
     options: [
       "finance", 
@@ -139,7 +139,7 @@ export const EditorUserFields = [
   {
     key: 5,
     type: "text",
-    fname: "writerDomains",
+    fname: "domains",
     label: "Editor domains",
     options: [
       "finance",
