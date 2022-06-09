@@ -51,42 +51,39 @@ export const WriterUserFields = [
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
   { key: 1, type: "date", fname: "dob", label: "date of birth" },
-  { key: 0, type: "text", fname: "address", label: "address" },
-  { key: 0, type: "number", fname: "bankAccNo", label: "bank account number" },
+  { key: 0, type: "text", fname: "resAddress", label: "address" },
+  { key: 0, type: "number", fname: "acNumber", label: "bank account number" },
   { key: 0, type: "text", fname: "ifscCode", label: "IFSC code" },
   {
-    key: 2,
+    key: 5,
     type: "text",
     fname: "writerSkills",
     label: "Writer skills",
-    options: [
-      { value: "blogs", label: "Blogs" },
-      { value: "website-content", label: "Website Content" },
-      { value: "college-assignment", label: "College Assignment" },
-      { value: "general", label: "General" },
+    options: ["blogs","website-content","college-assignment","general"
+     
+    
     ],
   },
   {
-    key: 2,
+    key: 5,
     type: "text",
-    fname: "writerDomain",
+    fname: "writerDomains",
     label: "Writer domain",
     options: [
-      { value: "finance", label: "Finance" },
-      { value: "hr", label: "HR" },
-      { value: "tech", label: "Tech" },
-      { value: "marketing", label: "Marketing" },
-      { value: "general", label: "General" },
-    ],
+      "finance", 
+      "hr",
+     "tech", 
+     "marketing",
+       "general", ]
   },
   {
     key: 2,
     type: "text",
-    fname: "podiumProRelationship",
+    fname: "podiumProRelation,",
     label: "Relationship with Podium pro",
     options: [
-      { value: "part-time", label: "Part time" },
-      { value: "full-time", label: "Full time" },
+       "part-time",
+      "full-time", 
     ],
   },
   {
@@ -96,9 +93,8 @@ export const WriterUserFields = [
     label: "Commercial Agreement",
 
     options: [
-      { value: "salary", label: "Salary" },
-      { value: "per-word", label: "per Word" },
-    ],
+    "salary", 
+     "per-word",]
   },
   { key: 0, type: "number", fname: "salaryValue", label: "Salary Value" },
   {
@@ -107,26 +103,15 @@ export const WriterUserFields = [
     fname: "perWordValue",
     label: "per Word value(if applicable)",
   },
-  // {
-  //   key: 2,
-  //   type: "text",
-  //   fname: "userType",
-  //   label: "Type of user",
-  //   options: [
-  //     { value: "writer", label: "Writer" },
-  //     { value: "editor", label: "Editor" },
-  //     { value: "project manager", label: "Project Manager" },
-  //     { value: "admin", label: "Administrator" },
-  //   ],
-  // },
+ 
   {
     key: 2,
     type: "text",
     fname: "isActive",
     label: "Status",
     options: [
-      { value: true, label: "Yes" },
-      { value: false, label: "No" },
+    "yes",
+  "no"
     ],
   },
   { key: 0, type: "number", fname: "rating", label: "Rating" },
@@ -136,42 +121,42 @@ export const EditorUserFields = [
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
   { key: 1, type: "date", fname: "dob", label: "date of birth" },
-  { key: 0, type: "text", fname: "address", label: "address" },
-  { key: 0, type: "number", fname: "bankAccNo", label: "bank account number" },
+  { key: 0, type: "text", fname: "resAddress", label: "address" },
+  { key: 0, type: "number", fname: "acNumber", label: "bank account number" },
   { key: 0, type: "text", fname: "ifscCode", label: "IFSC code" },
   {
-    key: 2,
+    key: 5,
     type: "text",
     fname: "writerSkills",
-    label: "Writer skills",
+    label: "Editor skills",
     options: [
-      { value: "blogs", label: "Blogs" },
-      { value: "website-content", label: "Website Content" },
-      { value: "college-assignment", label: "College Assignment" },
-      { value: "general", label: "General" },
+   "blogs",
+    "website-content",
+     "college-assignment",
+       "general",
+    ],
+  },
+  {
+    key: 5,
+    type: "text",
+    fname: "writerDomains",
+    label: "Editor domains",
+    options: [
+      "finance",
+     "hr", 
+      "tech", 
+     "marketing", 
+      "general",
     ],
   },
   {
     key: 2,
     type: "text",
-    fname: "writerDomain",
-    label: "Writer domain",
-    options: [
-      { value: "finance", label: "Finance" },
-      { value: "hr", label: "HR" },
-      { value: "tech", label: "Tech" },
-      { value: "marketing", label: "Marketing" },
-      { value: "general", label: "General" },
-    ],
-  },
-  {
-    key: 2,
-    type: "text",
-    fname: "podiumProRelationship",
+    fname: "podiumProRelation,",
     label: "Relationship with Podium pro",
     options: [
-      { value: "part-time", label: "Part time" },
-      { value: "full-time", label: "Full time" },
+     "part-time",
+     "full-time", 
     ],
   },
   {
@@ -180,18 +165,12 @@ export const EditorUserFields = [
     fname: "commercialAgreement",
     label: "Commercial Agreement",
     options: [
-      { value: "salary", label: "Salary" },
-      { value: "per-word", label: "per Word" },
+     "salary", 
+      "per-word", 
     ],
-    action: `()={if(e.target.value === "salary"){document.getElementbyId("salaryValue").disabled = false;
-          document.getElementbyId("perWordValue").disabled = true;}
-          
-          else if(e.target.value === "per-word")
-         {document.getElementbyId("salaryValue").disabled = true;
-          document.getElementbyId("perWordValue").disabled = false;}
+ 
   
   
-  }`,
   },
   {
     key: 0,
@@ -207,26 +186,15 @@ export const EditorUserFields = [
     label: "per Word value(if applicable)",
     disabled: true,
   },
-  // {
-  //   key: 2,
-  //   type: "text",
-  //   fname: "userType",
-  //   label: "Type of user",
-  //   options: [
-  //     { value: "writer", label: "Writer" },
-  //     { value: "editor", label: "Editor" },
-  //     { value: "project manager", label: "Project Manager" },
-  //     { value: "admin", label: "Administrator" },
-  //   ],
-  // },
+  
   {
     key: 2,
     type: "text",
     fname: "isActive",
     label: "Status",
     options: [
-      { value: true, label: "Yes" },
-      { value: false, label: "No" },
+    "yes",
+    "no",
     ],
   },
   { key: 0, type: "number", fname: "rating", label: "Rating" },
@@ -236,26 +204,14 @@ export const SalesUserFields = [
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
 
-  // {
-  //   key: 2,
-  //   type: "text",
-  //   fname: "userType",
-  //   label: "Type of user",
-  //   options: [
-  //     { value: "writer", label: "Writer" },
-  //     { value: "editor", label: "Editor" },
-  //     { value: "project manager", label: "Project Manager" },
-  //     { value: "admin", label: "Administrator" },
-  //   ],
-  // },
+ 
   {
     key: 2,
     type: "text",
     fname: "isActive",
     label: "Status",
     options: [
-      { value: true, label: "Yes" },
-      { value: false, label: "No" },
+     "yes","no"
     ],
   },
 ];
@@ -264,26 +220,14 @@ export const PMUserFields = [
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
 
-  // {
-  //   key: 2,
-  //   type: "text",
-  //   fname: "userType",
-  //   label: "Type of user",
-  //   options: [
-  //     { value: "writer", label: "Writer" },
-  //     { value: "editor", label: "Editor" },
-  //     { value: "project manager", label: "Project Manager" },
-  //     { value: "admin", label: "Administrator" },
-  //   ],
-  // },
+  
   {
     key: 2,
     type: "text",
     fname: "isActive",
     label: "Status",
     options: [
-      { value: true, label: "Yes" },
-      { value: false, label: "No" },
+     "yes", "no",
     ],
   },
 ];
@@ -292,26 +236,15 @@ export const AdminUserFields = [
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
 
-  // {
-  //   key: 2,
-  //   type: "text",
-  //   fname: "userType",
-  //   label: "Type of user",
-  //   options: [
-  //     { value: "writer", label: "Writer" },
-  //     { value: "editor", label: "Editor" },
-  //     { value: "project manager", label: "Project Manager" },
-  //     { value: "admin", label: "Administrator" },
-  //   ],
-  // },
+  
   {
     key: 2,
     type: "text",
     fname: "isActive",
     label: "Status",
     options: [
-      { value: true, label: "Yes" },
-      { value: false, label: "No" },
+    "yes",
+    "no",
     ],
   },
 ];

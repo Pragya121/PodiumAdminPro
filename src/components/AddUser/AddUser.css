@@ -11,13 +11,13 @@ label{
         font-size: 14px;
       
 }
-.formForm {
-    display: block;
-    width: auto;
-    border: 2px solid #2980B9;
-    padding: .5rem;
-    font-size: 18px;
-    border-radius: 5px;
+.selected{
+    border: 5pc;
+    width: 90%;
+    justify-content: center;
+}
+input{
+    width: 90%;
 }
 @media screen and (max-width: 1200px) {
     .AddUser {

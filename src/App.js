@@ -48,13 +48,13 @@ function App() {
       <div className="AppGlass">
         <Sidebar></Sidebar>
         <div>
-          <BrowserRouter>
+        <BrowserRouter>
             <Switch>
               <Route exact path="/" render={() => <MainDash />} />
               <Route path="/addUser" render={() => <AddUser />} />
               <Route path="*" render={() => <NotFound />} />
             </Switch>
-          </BrowserRouter>
+            </BrowserRouter>
         </div>
         <div className="RightSide">
           {quote !== undefined ? (

@@ -9,12 +9,25 @@ import { motion } from "framer-motion";
 import MainDash from "../MainDash/MainDash";
 import AddUser from "../AddUser/AddUser";
 // import NotFound from "./NotFound";
-
+import firebase from "firebase/app";
+import "firebase/auth";
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
 
   const [expanded, setExpaned] = useState(true)
-
+const signOut = (e)=>{
+  firebase.auth().signOut().then(() => {
+  
+    console.log("Signed out")
+    localStorage.removeItem("token");
+    localStorage.removeItem("loginData");
+    window.location.reload();
+  }).catch((error) => {
+    // An error happened.
+    alert("error");
+    console.log(error);
+  });
+}
   const sidebarVariants = {
     true: {
       left : '0'
@@ -63,11 +76,16 @@ const Sidebar = () => {
           );
         })}
         {/* signoutIcon */}
-         <div className="menuItem">
-          <div><UilSignOutAlt /></div>
+        <motion.div className='sidebar'
+    variants={sidebarVariants}
+    animate={window.innerWidth<=768?`${expanded}`:''}
+    >
+         <div className="menuItem" onClick={signOut}>
+          <div><UilSignOutAlt  /></div>
           <div>Sign Out</div>
           
         </div>
+        </motion.div>
       </div>
     </motion.div>
     </>
