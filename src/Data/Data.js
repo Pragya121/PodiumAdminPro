@@ -32,18 +32,18 @@ export const SidebarData = [
   },
   {
     icon: UilUsersAlt,
-    heading: "List of writers",
-    path: "/writerList",
+    heading: "List of Users",
+    path: "/viewUsers",
   },
   {
     icon: UilPackage,
     heading: "Tasks",
-    path: "/",
+    path: "/tasks",
   },
   {
     icon: UilChart,
     heading: "View Progress",
-    path: "/",
+    path: "/viewProgress",
   },
 ];
 export const WriterUserFields = [
@@ -57,7 +57,7 @@ export const WriterUserFields = [
   {
     key: 5,
     type: "text",
-    fname: "writerSkills",
+    fname: "skills",
     label: "Writer skills",
     options: ["blogs","website-content","college-assignment","general"
      
@@ -79,7 +79,7 @@ export const WriterUserFields = [
   {
     key: 2,
     type: "text",
-    fname: "podiumProRelation,",
+    fname: "podiumProRelation",
     label: "Relationship with Podium pro",
     options: [
        "part-time",
@@ -127,7 +127,7 @@ export const EditorUserFields = [
   {
     key: 5,
     type: "text",
-    fname: "writerSkills",
+    fname: "skills",
     label: "Editor skills",
     options: [
    "blogs",
@@ -152,7 +152,7 @@ export const EditorUserFields = [
   {
     key: 2,
     type: "text",
-    fname: "podiumProRelation,",
+    fname: "podiumProRelation",
     label: "Relationship with Podium pro",
     options: [
      "part-time",

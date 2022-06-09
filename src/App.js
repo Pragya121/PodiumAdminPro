@@ -6,6 +6,7 @@ import AddUser from "./components/AddUser/AddUser";
 import NotFound from "./components/NotFound";
 // import { NotFound } from "./components/NotFound";
 import Sidebar from "./components/Sidebar/Sidebar";
+import ViewUser from "./components/AddUser/ViewUser/ViewUser";
 function App() {
   const [quote, setQuote] = useState();
 
@@ -52,6 +53,7 @@ function App() {
             <Switch>
               <Route exact path="/" render={() => <MainDash />} />
               <Route path="/addUser" render={() => <AddUser />} />
+              <Route path="/viewUsers" render={() => <ViewUser />} />
               <Route path="*" render={() => <NotFound />} />
             </Switch>
             </BrowserRouter>

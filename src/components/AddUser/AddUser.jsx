@@ -37,7 +37,7 @@ const AddUser = () => {
     fields: [],
     allSet: false,
   });
-
+console.log(token);
   // ...
 
   const BASE_URL = "https://us-central1-podiumpro-9cc8e.cloudfunctions.net";
