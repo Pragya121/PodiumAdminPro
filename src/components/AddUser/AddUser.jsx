@@ -83,11 +83,7 @@ console.log(token);
       console.error(errors);
     }
   };
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  
   const postUser = async (finalData) => {
     try {
       let config = {

@@ -6,7 +6,7 @@ import AddUser from "./components/AddUser/AddUser";
 import NotFound from "./components/NotFound";
 // import { NotFound } from "./components/NotFound";
 import Sidebar from "./components/Sidebar/Sidebar";
-import ViewUser from "./components/AddUser/ViewUser/ViewUser";
+import ViewUser from "./components/ViewUser/ViewUser";
 function App() {
   const [quote, setQuote] = useState();
 

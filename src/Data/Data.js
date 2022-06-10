@@ -49,7 +49,7 @@ export const SidebarData = [
 export const WriterUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
   { key: 1, type: "date", fname: "dob", label: "date of birth" },
   { key: 0, type: "text", fname: "resAddress", label: "address" },
   { key: 0, type: "number", fname: "acNumber", label: "bank account number" },
@@ -93,8 +93,8 @@ export const WriterUserFields = [
     label: "Commercial Agreement",
 
     options: [
-    "salary", 
-     "per-word",]
+    "Salary", 
+     "Per-word",]
   },
   { key: 0, type: "number", fname: "salaryValue", label: "Salary Value" },
   {
@@ -119,7 +119,7 @@ export const WriterUserFields = [
 export const EditorUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
   { key: 1, type: "date", fname: "dob", label: "date of birth" },
   { key: 0, type: "text", fname: "resAddress", label: "address" },
   { key: 0, type: "number", fname: "acNumber", label: "bank account number" },
@@ -165,8 +165,8 @@ export const EditorUserFields = [
     fname: "commercialAgreement",
     label: "Commercial Agreement",
     options: [
-     "salary", 
-      "per-word", 
+     "Salary", 
+      "Per-word", 
     ],
  
   
@@ -202,7 +202,7 @@ export const EditorUserFields = [
 export const SalesUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
 
  
   {
@@ -218,7 +218,7 @@ export const SalesUserFields = [
 export const PMUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
 
   
   {
@@ -234,7 +234,7 @@ export const PMUserFields = [
 export const AdminUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
 
   
   {
@@ -252,7 +252,7 @@ export const ClientUserFields = [
   { key: 0, type: "text", fname: "name", label: "name" },
   { key: 0, type: "text", fname: "email", label: "email" },
   { key: 0, type: "text", fname: "company", label: "company" },
-  { key: 0, type: "number", fname: "phoneNo", label: "phone number" },
+  { key: 0, type: "number", fname: "phoneNumber", label: "phone number" },
 ];
 // Analytics Cards Data
 export const cardsData = [

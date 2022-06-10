@@ -31,6 +31,12 @@ const MainDash = () => {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
+   
+    useEffect(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("loginData");
+    }, [])
+    
     console.log(firebase.apps);
     function showIDToken() {
       firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {

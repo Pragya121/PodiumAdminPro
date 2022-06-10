@@ -15,6 +15,19 @@ const Sidebar = () => {
   const [selected, setSelected] = useState(0);
 
   const [expanded, setExpaned] = useState(true)
+  var firebaseConfig = {
+    apiKey: "AIzaSyD8yYba6Z_DpycbSF95Po9PqoDBSnYKrWE",
+    authDomain: "podiumpro-9cc8e.firebaseapp.com",
+    databaseURL: "https://podiumpro-9cc8e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "podiumpro-9cc8e",
+    storageBucket: "podiumpro-9cc8e.appspot.com",
+    messagingSenderId: "752240947198",
+    appId: "1:752240947198:web:1e1adfcd532c11d8f25aaf",
+    measurementId: "G-DL8PCTE9JY",
+  };
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
 const signOut = (e)=>{
   firebase.auth().signOut().then(() => {
   
@@ -28,6 +41,7 @@ const signOut = (e)=>{
     console.log(error);
   });
 }
+
   const sidebarVariants = {
     true: {
       left : '0'
@@ -76,16 +90,13 @@ const signOut = (e)=>{
           );
         })}
         {/* signoutIcon */}
-        <motion.div className='sidebar'
-    variants={sidebarVariants}
-    animate={window.innerWidth<=768?`${expanded}`:''}
-    >
+     
          <div className="menuItem" onClick={signOut}>
           <div><UilSignOutAlt  /></div>
           <div>Sign Out</div>
           
         </div>
-        </motion.div>
+     
       </div>
     </motion.div>
     </>

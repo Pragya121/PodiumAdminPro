@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+.base{
+    max-width: 1600px;
+    overflow: auto;
+}
 button{
     background-color: #d11e4b; /* Green */
     border: none;
