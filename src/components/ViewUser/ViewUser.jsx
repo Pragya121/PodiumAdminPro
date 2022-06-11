@@ -590,19 +590,29 @@ function ViewUser() {
   ];
   console.log(token);
   const deleteUser = async (realtimeID, firestoreID) => {
-    let userData = {
-      realtimeID: realtimeID,
-      firestoreID: firestoreID,
-    };
+
+
+    var data = JSON.stringify( {
+      "firestoreID": firestoreID,
+      "realtimeID": realtimeID,
+    });
+    
+    
     try {
+     
+
       let config = {
+        
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      
       };
+      
+     
       const response = await axios.delete(
         `${BASE_URL}/internalUsers`,
-        userData,
+       data,
         config
       );
 
@@ -622,9 +632,7 @@ function ViewUser() {
       .then((res) => {
         resolve();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+     
   }
 
   const postUser = async (finalData) => {
