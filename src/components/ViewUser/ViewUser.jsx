@@ -89,7 +89,7 @@ function ViewUser() {
       const response = await axios.get(`${BASE_URL}/configVariables`);
 
       const resp = response.data;
-      debugger;
+      ;
       let domainSet = [];
       resp.writerDomains.map((dom) => {
         let obj = {
@@ -113,8 +113,6 @@ function ViewUser() {
         isSet: true,
       });
 
-      
-
       return resp;
     } catch (errors) {
       console.error(errors);
@@ -126,6 +124,72 @@ function ViewUser() {
   }, []);
   const columns = [
     { title: "fireStoreID", field: "firestoreID", hidden: true },
+    {
+      title: "Role",
+      field: "role",
+
+      editComponent: (props) => {
+        return (
+          <select
+            id="roleType"
+            key="roleType"
+            onChange={(e) => {
+              debugger;
+              let dob = document.getElementById("dob");
+              let acNumber = document.getElementById("acNumber");
+              let ifscCode = document.getElementById("ifscCode");
+              let company = document.getElementById("company");
+              // let skills = document.getElementById("skilldiv");
+              // let domains = document.getElementById("domaindiv");
+              let aggreement = document.getElementById("commercialAgreement");
+              let podiumProRelation = document.getElementById("podiumProRelation");
+              let resAddress = document.getElementById("resAddress");
+              let role = e.target.value;
+              if (role === "writer" || role === "editor") {
+                // skills.hidden = false;
+                company.disabled=true;
+                dob.disabled= false;
+                aggreement.disabled = false;
+                podiumProRelation.disabled = false;
+                resAddress.disabled = false;
+                ifscCode.disabled = false;
+                acNumber.disabled = false;
+                // domains.hidden= false;
+              } else {
+                if(role==="client")
+                {
+                  company.disabled=false;
+                }else{
+                  company.disabled=true;
+                }
+                // skills.hidden = true;
+                aggreement.disabled = true;
+                dob.disabled= true;
+                podiumProRelation.disabled = true;
+                resAddress.disabled = true;
+                ifscCode.disabled = true;
+                acNumber.disabled = true;
+                // domains.hidden= true;
+                props.rowData.domains = [];
+                props.rowData.skills = [];
+                props.rowData.aggreement = "";
+                props.rowData.resAddress = "";
+                props.rowData.acNumber = "";
+                props.rowData.ifscCode = "";
+                props.rowData.podiumProRelation = "";
+
+              }
+
+              props.onChange(e.target.value);
+            }}
+          >
+            {dFields.roles.map((role) => {
+              return <option>{role}</option>;
+            })}
+          </select>
+        );
+      },
+    },
     {
       title: "Name",
       field: "name",
@@ -162,42 +226,36 @@ function ViewUser() {
       },
       editComponent: (props) => {
         return (
-          <CreatableSelect
-            isMulti
-            onChange={(newValue, actionMeta) => {
-              console.log(newValue);
-              console.log(`action: ${actionMeta.action}`);
-              let set = [];
-              newValue.map((row) => {
-                set.push(row.value);
-              });
-              props.onChange(set);
-            }}
-            options={dFields.writerSkills}
-          />
+          <div className="skilldiv" >
+            <CreatableSelect
+              isMulti
+              onChange={(newValue, actionMeta) => {
+                debugger;
+                let role = document.getElementById("roleType").value;
+                if(role !== "writer" && role !== "editor" ){
+                  alert("only writers and editors can have this property");
+                  // newValue=[];
+                  props.onChange([]);
+                  return;
+                }
+                else{
+                  console.log(newValue);
+                  console.log(`action: ${actionMeta.action}`);
+                  let set = [];
+                  newValue.map((row) => {
+                    set.push(row.value);
+                  });
+                  props.onChange(set);
+                }
+                
+              }}
+              options={dFields.writerSkills}
+            />
+          </div>
         );
       },
     },
-    {
-      title: "Role",
-      field: "role",
 
-      editComponent: (props) => {
-        return (
-          <select
-            id="roleType"
-            key="roleType"
-            onChange={(e) => {
-              props.onChange(e.target.value);
-            }}
-          >
-            {dFields.roles.map((role) => {
-              return <option>{role}</option>;
-            })}
-          </select>
-        );
-      },
-    },
     { title: "realtimeID", field: "realtimeID", hidden: true },
 
     {
@@ -221,19 +279,37 @@ function ViewUser() {
       },
       editComponent: (props) => {
         return (
-          <CreatableSelect
-            isMulti
-            onChange={(newValue, actionMeta) => {
-              console.log(newValue);
-              console.log(`action: ${actionMeta.action}`);
-              let set = [];
-              newValue.map((row) => {
-                set.push(row.value);
-              });
-             props.onChange(set);
-            }}
-            options={dFields.writerDomains}
-          />
+          <div className="domaindiv" >
+            <CreatableSelect
+              isMulti
+              onChange={(newValue, actionMeta) => {
+                let role = document.getElementById("roleType");
+                if(role.value !== "writer" && role.value !== "editor" ){
+                //   newValue=[
+                //     {
+                //         "label": "",
+                //         "value": ""
+                //     }
+                // ];
+                props.onChange([]);
+                  alert("only writers and editors can have this property");
+                  return;
+                }
+                else{
+
+                  console.log(newValue);
+                  console.log(`action: ${actionMeta.action}`);
+                  let set = [];
+                  newValue.map((row) => {
+                    set.push(row.value);
+                  });
+                  props.onChange(set);
+                }
+               
+              }}
+              options={dFields.writerDomains}
+            />
+          </div>
         );
       },
     },
@@ -255,9 +331,11 @@ function ViewUser() {
               let salaryvalue = document.getElementById("salaryValue");
               if (agree === "Salary") {
                 perwordvalue.disabled = true;
+                perwordvalue.value="";
                 salaryvalue.disabled = false;
               } else if (agree === "Per-word") {
                 perwordvalue.disabled = false;
+                salaryvalue.value="";
                 salaryvalue.disabled = true;
               }
               props.onChange(e.target.value);
@@ -282,6 +360,7 @@ function ViewUser() {
       editComponent: (props) => {
         return (
           <input
+          disabled
             type="number"
             id="salaryValue"
             min={1}
@@ -305,6 +384,7 @@ function ViewUser() {
         return (
           <input
             type="number"
+            disabled
             id="perwordvalue"
             min={1}
             defaultValue={props.rowData.perwordvalue}
@@ -322,16 +402,42 @@ function ViewUser() {
       type: "numeric",
       editable: "never",
     },
-    { title: "Given Rating", field: "givenRating", type: "numeric" },
+    { title: "Given Rating", field: "givenRating", type: "numeric" ,
+    editComponent: (props) => {
+      return (
+        <input
+          id="givenRating"
+          disabled
+          onChange={(e) => {
+            props.onChange(e.target.value);
+          }}
+          defaultValue={props.value}
+        />
+      );
+    },
+  },
     { title: "Created By", field: "createdBy", editable: "never" },
     {
       title: "Address",
 
       field: "resAddress",
-      editable: (_, rowData) => {
-        if (rowData && rowData.role === "writer") return true;
-        else if (rowData && rowData.role === "editor") return true;
-        else return false;
+      // editable: (_, rowData) => {
+      //   if (rowData && rowData.role === "writer") return true;
+      //   else if (rowData && rowData.role === "editor") return true;
+      //   else return false;
+      // },
+
+      editComponent: (props) => {
+        return (
+          <input
+          disabled
+            id="resAddress"
+            onChange={(e) => {
+              props.onChange(e.target.value);
+            }}
+            defaultValue={props.value}
+          />
+        );
       },
     },
     {
@@ -366,6 +472,19 @@ function ViewUser() {
       //   else if (rowData && rowData.role === "editor") return true;
       //   else return false;
       // },
+      editComponent: (props) => {
+        return (
+          <input
+            id="acNumber"
+            disabled
+            onChange={(e) => {
+              props.onChange(e.target.value);
+            }}
+            defaultValue={props.value}
+          />
+        );
+      },
+      
     },
     {
       title: "Company",
@@ -374,6 +493,19 @@ function ViewUser() {
       //   if (rowData && rowData.role === "client") return true;
       //   else return false;
       // },
+      editComponent: (props) => {
+        return (
+          <input
+            disabled
+            id="company"
+            min={1}
+            defaultValue={props.value}
+            onChange={(e) => {
+              props.onChange(e.target.value);
+            }}
+          />
+        );
+      },
     },
     {
       title: "IFSC Code",
@@ -383,6 +515,19 @@ function ViewUser() {
       //   else if (rowData && rowData.role === "editor") return true;
       //   else return false;
       // },
+      editComponent: (props) => {
+        return (
+          <input
+            disabled
+            id="ifscCode"
+           
+            defaultValue={props.value}
+            onChange={(e) => {
+              props.onChange(e.target.value);
+            }}
+          />
+        );
+      },
     },
     {
       title: "Date of Birth",
@@ -396,6 +541,24 @@ function ViewUser() {
         if (rowData.dob) {
           return new Date(rowData.dob).toLocaleDateString("en-IN");
         }
+      },
+      editComponent: (props) => {
+        return (
+          <input
+            disabled
+            type="date"
+            id="dob"
+            min={1}
+            defaultValue={props.value}
+            onChange={(e) => {
+              let date = 
+              new Date(e.target.value).toISOString();
+              console.log(date);
+
+              props.onChange(date);
+            }}
+          />
+        );
       },
     },
 
@@ -425,12 +588,12 @@ function ViewUser() {
       },
     },
   ];
-
+  console.log(token);
   const deleteUser = async (realtimeID, firestoreID) => {
     let userData = {
-      "realtimeID":realtimeID,
-      "firestoreID": firestoreID,
-    }
+      realtimeID: realtimeID,
+      firestoreID: firestoreID,
+    };
     try {
       let config = {
         headers: {
@@ -446,29 +609,27 @@ function ViewUser() {
       const resp = response.data;
 
       console.log(`info`, resp);
-alert("Successful deletion");
+      alert("Successful deletion");
       return resp;
     } catch (errors) {
+      alert(" deletion not done");
       console.error(errors);
     }
   };
   function handleRowDelete(newData, oldData, resolve, reject) {
     // validations
-    deleteUser(newData.realtimeID,newData.firestoreID).then((res)=>{
-
-      resolve();
-    }).catch((err)=>{
-      console.log(err);
-    })
-
-
-
-   
-   
+    deleteUser(newData.realtimeID, newData.firestoreID)
+      .then((res) => {
+        resolve();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const postUser = async (finalData) => {
     try {
+   console.log(finalData);
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -479,74 +640,59 @@ alert("Successful deletion");
         finalData,
         config
       );
-
+      alert("data was updated");
+      
       const resp = response.data;
 
       console.log(`info`, resp);
 
       return resp;
     } catch (errors) {
+      alert("data was not updated");
       console.error(errors);
     }
   };
 
   function handleRowUpdate(newData, oldData, resolve, reject) {
     // validations
-
+    debugger;
     if (newData.name.length === 0) {
       alert("Please enter name");
       reject();
-    }  if (newData.role.length === 0) {
-      alert("Please enter role");
-      reject();
     }
-    else if (newData.role === "writer"|| newData.role === "editor") {
-      if (newData.skills === null || newData.skills.length===0) {
-        alert("Please enter skills");
-        reject();
-      }
-     else if (newData.domains === null || newData.domains.length===0) {
+    if(newData.role === "writer" || newData.role === "editor"){
+      if (newData.domains.length === 0) {
         alert("Please enter domains");
         reject();
       }
-      if (newData.commercialAgreement === undefined || newData.commercialAgreement === "") {
-        alert("Please enter agreement");
+      if (newData.skills.length === 0) {
+        alert("Please enter skills");
         reject();
       }
-      if (newData.salary === null || newData.perWord === undefined) {
-        alert("Please enter salary or per word value");
-        reject();
+
+    }
+    if(newData.role === "client"){
+      if(newData.company === ""){
+        alert("Please enter company");
+      reject();
       }
-     
-    } 
-    if (newData.phoneNumber === null || newData.phoneNumber === undefined) {
-      alert("Please enter phoneNumber");
-      reject();
     }
-    if (newData.email===""||newData.email===null ) {
-      alert("Please enter email");
-      reject();
-    }
-    if (newData.isActive==="" ) {
-      alert("Please enter status");
-      reject();
-    }
-    
     else {
       const dataUpdate = [...data];
       const index = oldData.tableData.id;
-      postUser(newData).then((res)=>{
-        alert("data was updated")
-        setData(dataUpdate);
-        resolve();
-      }).catch((error)=>{
-        console.log(error);
-        reject();
+     let  finalData={
+        "userData": newData,
       }
-      )
-
-
-
+      postUser(finalData)
+        .then((res) => {
+          dataUpdate[index] = newData;
+          setData(dataUpdate);
+          resolve();
+        })
+        .catch((error) => {
+          console.log(error);
+          reject();
+        });
     }
   }
   return (
